@@ -13,12 +13,12 @@ NULL
 
 #' @title Compile a PRQL query into a SQL query
 #' @param prql_query a PRQL query string.
-#' @param dialect a SQL dialect name to use. If it is not a valid value, the dialect contained in the query will be used.
+#' @param target a compile target name to use. If it is not a valid value, the target contained in the query will be used.
 #' @param format a logical flag. Whether to format the SQL query.
 #' @param signature_comment a logical flag. Whether to add a signature comment to the output SQL query.
-#' @return a SQL query string
+#' @return a list contains a SQL string or an error message.
 #' @noRd
-compile <- function(prql_query, dialect, format, signature_comment) .Call(wrap__compile, prql_query, dialect, format, signature_comment)
+compile <- function(prql_query, target, format, signature_comment) .Call(wrap__compile, prql_query, target, format, signature_comment)
 
 #' @noRd
 prql_to_pl <- function(prql_query) .Call(wrap__prql_to_pl, prql_query)
@@ -28,6 +28,19 @@ pl_to_rq <- function(pl_json) .Call(wrap__pl_to_rq, pl_json)
 
 #' @noRd
 rq_to_sql <- function(rq_json) .Call(wrap__rq_to_sql, rq_json)
+
+#' @title prql-compiler's version
+#' @return a prql-compiler's version string
+#' @noRd
+compiler_version <- function() .Call(wrap__compiler_version)
+
+#' @title Get available target names
+#' @description Get available target names for the `target` option of the [prql_compile()] function.
+#' @return a character vector of target names.
+#' @examples
+#' prql_get_targets()
+#' @export
+prql_get_targets <- function() .Call(wrap__prql_get_targets)
 
 
 # nolint end

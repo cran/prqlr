@@ -1,78 +1,88 @@
 use extendr_api::prelude::*;
 use std::str::FromStr;
 
+pub mod utils;
+use crate::utils::r_result_list;
+
 /// @title Compile a PRQL query into a SQL query
 /// @param prql_query a PRQL query string.
-/// @param dialect a SQL dialect name to use. If it is not a valid value, the dialect contained in the query will be used.
+/// @param target a compile target name to use. If it is not a valid value, the target contained in the query will be used.
 /// @param format a logical flag. Whether to format the SQL query.
 /// @param signature_comment a logical flag. Whether to add a signature comment to the output SQL query.
-/// @return a SQL query string
+/// @return a list contains a SQL string or an error message.
 /// @noRd
 #[extendr(use_try_from = true)]
 pub fn compile(
     prql_query: &str,
-    dialect: Option<String>,
+    target: Option<String>,
     format: bool,
     signature_comment: bool,
-) -> String {
-    let dialect = prql_compiler::sql::Dialect::from_str(dialect.as_deref().unwrap_or_default())
-        .map(From::from)
-        .ok();
+) -> List {
+    let target = prql_compiler::Target::from_str(&target.unwrap_or_default()).unwrap_or_default();
 
-    let options: Option<prql_compiler::sql::Options> = Some(prql_compiler::sql::Options {
+    let options: prql_compiler::Options = prql_compiler::Options {
         format,
-        dialect,
+        target,
         signature_comment,
-    });
+    };
 
     let result = Ok(prql_query)
         .and_then(prql_compiler::prql_to_pl)
         .and_then(prql_compiler::pl_to_rq)
-        .and_then(|rq| prql_compiler::rq_to_sql(rq, options.map(prql_compiler::sql::Options::from)))
+        .and_then(|rq| prql_compiler::rq_to_sql(rq, options))
         .map_err(|e| e.composed("", prql_query, false));
 
-    unwrap_or_throw(result)
+    r_result_list(result)
 }
 
 /// @noRd
 #[extendr]
-pub fn prql_to_pl(prql_query: &str) -> String {
+pub fn prql_to_pl(prql_query: &str) -> List {
     let result = Ok(prql_query)
         .and_then(prql_compiler::prql_to_pl)
         .and_then(prql_compiler::json::from_pl);
 
-    unwrap_or_throw(result)
+    r_result_list(result)
 }
 
 /// @noRd
 #[extendr]
-pub fn pl_to_rq(pl_json: &str) -> String {
+pub fn pl_to_rq(pl_json: &str) -> List {
     let result = Ok(pl_json)
         .and_then(prql_compiler::json::to_pl)
         .and_then(prql_compiler::pl_to_rq)
         .and_then(prql_compiler::json::from_rq);
 
-    unwrap_or_throw(result)
+    r_result_list(result)
 }
 
 /// @noRd
 #[extendr]
-pub fn rq_to_sql(rq_json: &str) -> String {
+pub fn rq_to_sql(rq_json: &str) -> List {
     let result = Ok(rq_json)
         .and_then(prql_compiler::json::to_rq)
-        .and_then(|x| prql_compiler::rq_to_sql(x, None));
+        .and_then(|x| prql_compiler::rq_to_sql(x, prql_compiler::Options::default()));
 
-    unwrap_or_throw(result)
+    r_result_list(result)
 }
 
-fn unwrap_or_throw(result: anyhow::Result<String, prql_compiler::ErrorMessages>) -> String {
-    match result {
-        Ok(v) => v,
-        Err(e) => {
-            throw_r_error(e.to_string());
-            unreachable!()
-        }
-    }
+/// @title prql-compiler's version
+/// @return a prql-compiler's version string
+/// @noRd
+#[extendr]
+pub fn compiler_version() -> String {
+    prql_compiler::PRQL_VERSION.to_string()
+}
+
+/// @title Get available target names
+/// @description Get available target names for the `target` option of the [prql_compile()] function.
+/// @return a character vector of target names.
+/// @examples
+/// prql_get_targets()
+/// @export
+#[extendr]
+pub fn prql_get_targets() -> Vec<String> {
+    prql_compiler::Target::names()
 }
 
 extendr_module! {
@@ -81,4 +91,6 @@ extendr_module! {
     fn prql_to_pl;
     fn pl_to_rq;
     fn rq_to_sql;
+    fn compiler_version;
+    fn prql_get_targets;
 }

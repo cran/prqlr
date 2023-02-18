@@ -5,14 +5,19 @@
 \alias{prql_to_sql}
 \title{Compile a PRQL query into a SQL query}
 \usage{
-prql_compile(prql_query, dialect = NA, format = TRUE, signature_comment = TRUE)
+prql_compile(
+  prql_query,
+  target = getOption("prqlr.target"),
+  format = getOption("prqlr.format", TRUE),
+  signature_comment = getOption("prqlr.signature_comment", TRUE)
+)
 
 prql_to_sql(prql)
 }
 \arguments{
 \item{prql_query, prql}{a PRQL query string.}
 
-\item{dialect}{a SQL dialect name to use. If not specified, the dialect contained in the query will be used.}
+\item{target}{a compile target name to use. If not specified, the target contained in the query will be used.}
 
 \item{format}{a logical flag. Whether to format the SQL query.}
 
@@ -39,10 +44,10 @@ from mtcars
 filter cyl > 6
 select ![cyl]
 " |>
-  prql_compile("duckdb") |>
+  prql_compile("sql.duckdb") |>
   cat()
 
-# Target dialect can also be written in the PRQL query.
+# Target can also be written in the PRQL query.
 "
 prql target:sql.duckdb
 
@@ -54,5 +59,5 @@ select ![cyl]
   cat()
 }
 \seealso{
-\link{prql_available_dialects}
+\link{prql_get_targets}
 }

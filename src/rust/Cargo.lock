@@ -78,18 +78,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bstr"
-version = "0.2.17"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba3569f383e8f1598449f1a423e72e99569137b47740b1da11ef19af3d5c3223"
-dependencies = [
- "lazy_static",
- "memchr",
- "regex-automata",
- "serde",
-]
-
-[[package]]
 name = "cc"
 version = "1.0.73"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -159,13 +147,12 @@ dependencies = [
 
 [[package]]
 name = "csv"
-version = "1.1.6"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22813a6dc45b335f9bade10bf7271dc477e81113e89eb251a0bc2a8a81c536e1"
+checksum = "af91f40b7355f82b0a891f50e70399475945bb0b0da4f1700ce60761c9d3e359"
 dependencies = [
- "bstr",
  "csv-core",
- "itoa 0.4.8",
+ "itoa",
  "ryu",
  "serde",
 ]
@@ -210,7 +197,7 @@ dependencies = [
 [[package]]
 name = "extendr-api"
 version = "0.3.1"
-source = "git+https://github.com/extendr/extendr?rev=f511254b1be180528a1711e4c87473966a1010d0#f511254b1be180528a1711e4c87473966a1010d0"
+source = "git+https://github.com/extendr/extendr?rev=974cddc4ee5a4c3ab10e8bf85772b74c0a182f32#974cddc4ee5a4c3ab10e8bf85772b74c0a182f32"
 dependencies = [
  "extendr-engine",
  "extendr-macros",
@@ -222,7 +209,7 @@ dependencies = [
 [[package]]
 name = "extendr-engine"
 version = "0.3.1"
-source = "git+https://github.com/extendr/extendr?rev=f511254b1be180528a1711e4c87473966a1010d0#f511254b1be180528a1711e4c87473966a1010d0"
+source = "git+https://github.com/extendr/extendr?rev=974cddc4ee5a4c3ab10e8bf85772b74c0a182f32#974cddc4ee5a4c3ab10e8bf85772b74c0a182f32"
 dependencies = [
  "libR-sys",
 ]
@@ -230,7 +217,7 @@ dependencies = [
 [[package]]
 name = "extendr-macros"
 version = "0.3.1"
-source = "git+https://github.com/extendr/extendr?rev=f511254b1be180528a1711e4c87473966a1010d0#f511254b1be180528a1711e4c87473966a1010d0"
+source = "git+https://github.com/extendr/extendr?rev=974cddc4ee5a4c3ab10e8bf85772b74c0a182f32#974cddc4ee5a4c3ab10e8bf85772b74c0a182f32"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -278,12 +265,6 @@ checksum = "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473"
 dependencies = [
  "either",
 ]
-
-[[package]]
-name = "itoa"
-version = "0.4.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b71991ff56294aa922b450139ee08b3bfc70982c6b2c7562771375cf73542dd4"
 
 [[package]]
 name = "itoa"
@@ -434,8 +415,8 @@ dependencies = [
 
 [[package]]
 name = "prql-compiler"
-version = "0.4.1"
-source = "git+https://github.com/eitsupi/prql?rev=2513cfe7e1929398ca935f88a1548492331d2273#2513cfe7e1929398ca935f88a1548492331d2273"
+version = "0.5.1"
+source = "git+https://github.com/eitsupi/prql?rev=c9a123336417629ffda8b435a11110bf1180d42d#c9a123336417629ffda8b435a11110bf1180d42d"
 dependencies = [
  "anyhow",
  "ariadne",
@@ -486,12 +467,6 @@ dependencies = [
  "memchr",
  "regex-syntax",
 ]
-
-[[package]]
-name = "regex-automata"
-version = "0.1.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c230d73fb8d8c1b9c0b3135c5142a8acee3a0558fb8db5cf1cb65f8d7862132"
 
 [[package]]
 name = "regex-syntax"
@@ -552,7 +527,7 @@ version = "1.0.87"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce777b7b150d76b9cf60d28b55f5847135a003f7d7350c6be7a773508ce7d45"
 dependencies = [
- "itoa 1.0.4",
+ "itoa",
  "ryu",
  "serde",
 ]

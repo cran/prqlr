@@ -1,8 +1,10 @@
-## ---- include = FALSE---------------------------------------------------------
+## -----------------------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(prqlr)
 
 ## -----------------------------------------------------------------------------
 library(prqlr)
@@ -33,7 +35,7 @@ select [cyl, mpg]
 derive [mpg_int = round 0 mpg]
 take 3
 " |>
-  prql_compile("sqlite") |>
+  prql_compile("sql.sqlite") |>
   dbGetQuery(con, statement = _)
 
 ## -----------------------------------------------------------------------------
