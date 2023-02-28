@@ -1,8 +1,8 @@
-17fc31a9b0bbff16d279010b4ac5cec8 *DESCRIPTION
+6f9de991764c523335b21fa7d1d370a0 *DESCRIPTION
 3ad4977e333907a2a1c5b0234de51f13 *LICENSE
-e47401deb38702c898e65590d139a518 *LICENSE.note
+d1ca181164ffbd55c776291ab91c3b5a *LICENSE.note
 676dad554a49d7c646f354fac5284e6d *NAMESPACE
-923d00b531054f5829b84e1c10166d15 *NEWS.md
+943a511b96c39991197fcbc62dfa7d15 *NEWS.md
 6816e2a90ab7a1c8033fd0a0032817fb *R/compile.R
 664773bf32ad38ee11b272f029e875f9 *R/extendr-wrappers.R
 c04d6424dbba010a8d9a0c81edb99edf *R/knitr-engine.R
@@ -25,8 +25,8 @@ acd224d6d4e38d4d234b82d6413f1631 *src/Makevars
 be507f78e972e340aca650ee0db8fc18 *src/Makevars.win
 c0da627e7b2086b38c016c1806465846 *src/entrypoint.c
 17d4f9a529b407c0efe60cf595943eea *src/prqlr-win.def
-6d00bd505b8ca49de018e7f0c9ac5189 *src/rust/Cargo.lock
-3843cc4c281781052820b87987255122 *src/rust/Cargo.toml
+eee7f09cee9e0b078c983a8bc2b6cc9d *src/rust/Cargo.lock
+be7e6e1ec7b5d5abc98a9ac27ed3b3d9 *src/rust/Cargo.toml
 4313b573221945922899d2b9904ee536 *src/rust/src/lib.rs
 4cd5a5e07c8c69568ef627090e700d9d *src/rust/src/utils.rs
 7be260e677cf1d0b34830bfbe1896374 *tests/testthat.R
