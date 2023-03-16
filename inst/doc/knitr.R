@@ -33,8 +33,12 @@ con <- dbConnect(RSQLite::SQLite(), ":memory:")
 dbWriteTable(con, "mtcars", mtcars)
 
 ## -----------------------------------------------------------------------------
-res_with_con <- knitr::knit_child(text = src_with_con, quiet = TRUE)
-cat("````markdown", res_with_con, "````", sep = "")
+cat(
+  "````markdown",
+  knitr::knit_child(text = src_with_con, quiet = TRUE),
+  "````",
+  sep = ""
+)
 
 ## -----------------------------------------------------------------------------
 src_without_con <- r"(
@@ -59,8 +63,12 @@ cat("````markdown", src_without_con, "````", sep = "")
 library(prqlr)
 
 ## -----------------------------------------------------------------------------
-res_without_con <- knitr::knit_child(text = src_without_con, quiet = TRUE)
-cat("````markdown", res_without_con, "````", sep = "")
+cat(
+  "````markdown",
+  knitr::knit_child(text = src_without_con, quiet = TRUE),
+  "````",
+  sep = ""
+)
 
 ## -----------------------------------------------------------------------------
 library(prqlr)
@@ -96,4 +104,78 @@ take 3
 invisible(knitr::knit_child(text = src_engine_opts, quiet = TRUE))
 
 cat("````markdown", src_engine_opts, "````", sep = "")
+
+## -----------------------------------------------------------------------------
+src_glue <- r"(
+```{r}
+#| echo: false
+
+library(prqlr)
+
+cyl_min <- 6
+derive_or_select <- "derive"
+```
+
+```{prql}
+#| engine-opts:
+#|   use_glue: true
+
+from mtcars
+filter cyl > {{cyl_min}}
+select [cyl, mpg]
+{{derive_or_select}} [mpg_int = round 0 mpg]
+take 3
+```
+)"
+
+cat("````markdown", src_glue, "````", sep = "")
+
+## -----------------------------------------------------------------------------
+library(prqlr)
+
+cyl_min <- 6
+derive_or_select <- "derive"
+
+## -----------------------------------------------------------------------------
+cat(
+  "````markdown",
+  knitr::knit_child(text = src_glue, quiet = TRUE),
+  "````",
+  sep = ""
+)
+
+## -----------------------------------------------------------------------------
+src_query_from_r <- r"(
+```{r}
+#| echo: false
+
+library(prqlr)
+
+prql_query <- "from mtcars
+select cyl"
+```
+
+```{prql}
+#| engine-opts:
+#|   use_glue: true
+
+{{prql_query}}
+```
+)"
+
+cat("````markdown", src_query_from_r, "````", sep = "")
+
+## -----------------------------------------------------------------------------
+library(prqlr)
+
+prql_query <- "from mtcars
+select cyl"
+
+## -----------------------------------------------------------------------------
+cat(
+  "````markdown",
+  knitr::knit_child(text = src_query_from_r, quiet = TRUE),
+  "````",
+  sep = ""
+)
 

@@ -6,6 +6,10 @@ test_that("target set in the header ", {
     "SELECT TOP (1) * FROM a"
   )
   expect_equal(
+    prql_compile(mssql_query, target = "sql.any", format = FALSE, signature_comment = FALSE),
+    "SELECT TOP (1) * FROM a"
+  )
+  expect_equal(
     prql_compile(mssql_query, target = "sql.generic", format = FALSE, signature_comment = FALSE),
     "SELECT * FROM a LIMIT 1"
   )
@@ -31,7 +35,7 @@ test_that("Unsupported target", {
     prql_compile("prql target:foo\nfrom a | select [b]"),
     r"(target `"foo"` not found)"
   )
-    expect_error(
+  expect_error(
     prql_compile("prql target:sql.foo\nfrom a | select [b]"),
     r"(target `"sql.foo"` not found)"
   )
@@ -58,6 +62,13 @@ test_that("PRQL query", {
   )
 })
 
+patrick::with_parameters_test_that("Syntax error",
+  {
+    expect_snapshot(cat(prql_compile(query, "sql.any", TRUE, FALSE)), error = TRUE)
+  },
+  query = c("Mississippi has four S’s and four I’s.", "from a | select {b}", "from a | select {{{b")
+)
+
 patrick::with_parameters_test_that("Targets",
   {
     query <- "
@@ -79,5 +90,5 @@ take 2
 )
 
 test_that("prql-compiler's version", {
-  expect_equal(prql_version(), numeric_version("0.5.1"))
+  expect_equal(prql_version(), numeric_version("0.6.1"))
 })
