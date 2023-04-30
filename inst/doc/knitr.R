@@ -179,3 +179,32 @@ cat(
   sep = ""
 )
 
+## -----------------------------------------------------------------------------
+src_info_string <- r"(
+```{r}
+#| echo: false
+
+library(prqlr)
+```
+
+```{prql}
+#| engine-opts:
+#|   info_string: '{.sql filename="SQL"}'
+from mtcars
+take 3
+```
+)"
+
+cat("````markdown", src_info_string, "````", sep = "")
+
+## -----------------------------------------------------------------------------
+library(prqlr)
+
+## -----------------------------------------------------------------------------
+cat(
+  "````markdown",
+  knitr::knit_child(text = src_info_string, quiet = TRUE),
+  "````",
+  sep = ""
+)
+

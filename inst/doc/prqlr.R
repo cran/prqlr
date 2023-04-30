@@ -25,11 +25,11 @@ library(DBI)
 con <- dbConnect(RSQLite::SQLite(), ":memory:")
 
 # Create a table inclueds `mtcars` data
-dbWriteTable(con, "mtcars_table", mtcars)
+dbWriteTable(con, "mtcars", mtcars)
 
 # Execute a PRQL query
 "
-from mtcars_table
+from mtcars
 filter cyl > 6
 select [cyl, mpg]
 derive [mpg_int = round 0 mpg]
