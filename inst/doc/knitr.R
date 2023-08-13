@@ -18,8 +18,8 @@ dbWriteTable(con, "mtcars", mtcars)
 
 from mtcars
 filter cyl > 6
-select [cyl, mpg]
-derive [mpg_int = round 0 mpg]
+select {cyl, mpg}
+derive {mpg_int = round 0 mpg}
 take 3
 ```
 )"
@@ -51,8 +51,8 @@ library(prqlr)
 ```{prql}
 from mtcars
 filter cyl > 6
-select [cyl, mpg]
-derive [mpg_int = round 0 mpg]
+select {cyl, mpg}
+derive {mpg_int = round 0 mpg}
 take 3
 ```
 )"
@@ -122,8 +122,8 @@ derive_or_select <- "derive"
 
 from mtcars
 filter cyl > {{cyl_min}}
-select [cyl, mpg]
-{{derive_or_select}} [mpg_int = round 0 mpg]
+select {cyl, mpg}
+{{derive_or_select}} {mpg_int = round 0 mpg}
 take 3
 ```
 )"

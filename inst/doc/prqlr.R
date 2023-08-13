@@ -12,8 +12,8 @@ library(prqlr)
 "
 from mtcars
 filter cyl > 6
-select [cyl, mpg]
-derive [mpg_int = round 0 mpg]
+select {cyl, mpg}
+derive {mpg_int = round 0 mpg}
 " |>
   prql_compile() |>
   cat()
@@ -31,12 +31,23 @@ dbWriteTable(con, "mtcars", mtcars)
 "
 from mtcars
 filter cyl > 6
-select [cyl, mpg]
-derive [mpg_int = round 0 mpg]
+select {cyl, mpg}
+derive {mpg_int = round 0 mpg}
 take 3
 " |>
   prql_compile("sql.sqlite") |>
   dbGetQuery(con, statement = _)
+
+## -----------------------------------------------------------------------------
+"
+from mtcars
+filter cyl > 6
+select {cyl, mpg}
+derive {mpg_int = round 0 mpg}
+take 3
+" |>
+  prql_compile("sql.sqlite") |>
+  sqldf::sqldf()
 
 ## -----------------------------------------------------------------------------
 library(tidyquery)
@@ -46,13 +57,13 @@ library(nycflights13)
 from flights
 filter (distance | in 200..300)
 filter air_time != null
-group [origin, dest] (
-  aggregate [
-    num_flts = count,
+group {origin, dest} (
+  aggregate {
+    num_flts = count this,
     avg_delay = (average arr_delay | round 0)
-  ]
+  }
 )
-sort [-origin, avg_delay]
+sort {-origin, avg_delay}
 take 2
 " |>
   prql_compile() |>

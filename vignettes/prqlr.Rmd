@@ -29,8 +29,8 @@ For example, this is a PRQL query.
 #| eval: false
 from mtcars
 filter cyl > 6
-select [cyl, mpg]
-derive [mpg_int = round 0 mpg]
+select {cyl, mpg}
+derive {mpg_int = round 0 mpg}
 ```
 
 And, this is the SQL query that is compiled from the PRQL query.
@@ -78,6 +78,17 @@ take 3
   dbGetQuery(con, statement = _)
 ```
 
+We can also use the `sqldf::sqldf()` function to automatically register Data Frames to the database.
+
+```{r}
+"
+<<sample>>
+take 3
+" |>
+  prql_compile("sql.sqlite") |>
+  sqldf::sqldf()
+```
+
 Since SQLite is used here via `{RSQLite}`, the `target` option of `prql_compile()` is set to `"sql.sqlite"`.
 
 Available target names can be found with the `prql_get_targets()` function.
@@ -99,13 +110,13 @@ library(nycflights13)
 from flights
 filter (distance | in 200..300)
 filter air_time != null
-group [origin, dest] (
-  aggregate [
-    num_flts = count,
+group {origin, dest} (
+  aggregate {
+    num_flts = count this,
     avg_delay = (average arr_delay | round 0)
-  ]
+  }
 )
-sort [-origin, avg_delay]
+sort {-origin, avg_delay}
 take 2
 " |>
   prql_compile() |>

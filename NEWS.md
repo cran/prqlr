@@ -1,3 +1,23 @@
+# prqlr 0.5.0
+
+## Breaking changes
+
+- Based on [`prql-compiler`](https://github.com/prql/prql) 0.9.3 (#130, #137, #142, #145, #155)
+
+## Bug fixes
+
+- Support Rust 1.70 on Windows. (Thanks @yutannihilation, #138)
+
+## Miscellaneous
+
+- Some updates for adopting the (new) CRAN policy. (#148)
+  - This package now includes the `inst/AUTHORS` file. (#150, #154, #160)
+  - Set `SystemRequirements: Cargo (Rust's package manager), rustc` in the DESCRIPTION file. (#153)
+  - This package now includes the `configure` and `configure.win` scripts to check the cargo command. (#149)
+  - Set `CARGO_BUILD_JOBS=2` if not `NOT_CRAN=true` during installation. (#151)
+  - Supports dependent Rust crates vendoring. (#152, #159)
+  - Update the `LICENSE.note` file for Rust crates vendoring. (#156)
+
 # prqlr 0.4.0
 
 ## Breaking changes
