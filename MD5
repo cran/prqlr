@@ -1,8 +1,8 @@
-20e220a293752e19a77a48437c9991d2 *DESCRIPTION
+0d9e100483e32ab994f5fd08837a79f1 *DESCRIPTION
 3ad4977e333907a2a1c5b0234de51f13 *LICENSE
 b8815869a0eed9ab50903b5a1f524069 *LICENSE.note
 1a49089980717165356ccbc5fd0087bf *NAMESPACE
-d254c0640c9772ba77eb766726c6e593 *NEWS.md
+362b703d922d7b201519ceb392ab2d22 *NEWS.md
 d2c17502883138b3a21632d4a2409558 *R/compile.R
 a7790d30337a993e2699bad95bb48a6b *R/extendr-wrappers.R
 52f390523a3895718ed421fd615d7db5 *R/knitr-engine.R
@@ -12,7 +12,7 @@ a7790d30337a993e2699bad95bb48a6b *R/extendr-wrappers.R
 e5291dd4ea6ff1743135061996c32967 *build/vignette.rds
 fadcb5b4a00adb02701cafe6bdef013b *configure
 6b52cd53d19ffdd7b0e9dece5d9c518b *configure.win
-2fb09608f8f8f314e3b84c9d4553e0ed *inst/AUTHORS
+aaf9eb16865a91972d77f503d8dc629f *inst/AUTHORS
 a6339b554ed663e7f3c385ac7188cbb2 *inst/doc/knitr.R
 265c8397747e5dded29ba45489770d9a *inst/doc/knitr.Rmd
 2a1f3e031a01bd48506ba7b35baf12dd *inst/doc/knitr.html
@@ -33,6 +33,7 @@ c3b04df09bde455f7af477a09e23029b *src/rust/Cargo.lock
 d5e2c65a8a2b46e9d68da4a1161f46a9 *src/rust/src/lib.rs
 4cd5a5e07c8c69568ef627090e700d9d *src/rust/src/utils.rs
 a9475fd210043fa073aa56be3ce36910 *src/rust/vendor-config.toml
+9799702aef24b2005db746c1309d329f *src/rust/vendor.tar.xz
 7be260e677cf1d0b34830bfbe1896374 *tests/testthat.R
 aaadc979248f929cb6498e160ba1d9ea *tests/testthat/_snaps/compile.md
 746d40d3b4d84e9a234d56c3ca1d5341 *tests/testthat/_snaps/knitr-engine.md
