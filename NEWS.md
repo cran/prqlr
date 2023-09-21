@@ -1,10 +1,24 @@
+# prqlr 0.5.3
+
+## New features
+
+- Based on [`prql-compiler`](https://github.com/prql/prql) 0.9.5 (#179)
+
+## Miscellaneous
+
+- `prql` knitr engine requires `{knitr}` 1.44 or later. (#175)
+
 # prqlr 0.5.2
+
+From this version, CRAN releases include vendored dependent Rust crates source code.
 
 ## Miscellaneous
 
 - Update the `Authors` field of the DESCRIPTION file and the `inst/AUTHORS` file's format. (#169, #172)
 
 # prqlr 0.5.1
+
+## Bug fixes
 
 - Based on [`prql-compiler`](https://github.com/prql/prql) 0.9.4 (#164)
 
