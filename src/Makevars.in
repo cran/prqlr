@@ -1,0 +1,46 @@
+TARGET ?= @RUST_TARGET@
+PRQLR_PROFILE ?= release
+PRQLR_FEATURES ?=
+
+LIBNAME = libprqlr.a
+TARGET_DIR = $(CURDIR)/rust/target
+LIBDIR = $(TARGET_DIR)/$(TARGET)/$(PRQLR_PROFILE)
+STATLIB = $(LIBDIR)/$(LIBNAME)
+PKG_LIBS = -L$(LIBDIR) -lprqlr
+
+all: C_clean
+
+$(SHLIB): $(STATLIB)
+
+CARGOTMP = $(CURDIR)/.cargo
+VENDOR_DIR = $(CURDIR)/rust/vendor
+
+$(STATLIB):
+	if [ -f "$(CURDIR)/../tools/$(LIBNAME)" ]; then \
+		mkdir -p "$(LIBDIR)" ; \
+		mv "$(CURDIR)/../tools/$(LIBNAME)" "$(STATLIB)" ; \
+		exit 0; \
+	fi && \
+	if [ -f "$(CURDIR)/rust/vendor.tar.xz" ]; then \
+		mkdir -p "$(VENDOR_DIR)" && \
+		$(TAR) --extract --xz --file "$(CURDIR)/rust/vendor.tar.xz" -C "$(VENDOR_DIR)" && \
+		mkdir -p "$(CARGOTMP)" && \
+		cp "$(CURDIR)/rust/vendor-config.toml" "$(CARGOTMP)/config.toml"; \
+	fi && \
+	if [ "$(NOT_CRAN)" != "true" ]; then \
+		export CARGO_HOME="$(CARGOTMP)"; \
+		export CARGO_BUILD_JOBS=2; \
+	fi && \
+		export PATH="$(PATH):$(HOME)/.cargo/bin" && \
+		cargo build --lib --manifest-path="$(CURDIR)/rust/Cargo.toml" --target-dir "$(TARGET_DIR)" --target="$(TARGET)" \
+			--profile="$(PRQLR_PROFILE)" --features="$(PRQLR_FEATURES)"
+
+	if [ "$(NOT_CRAN)" != "true" ]; then \
+		rm -Rf "$(CARGOTMP)" "$(VENDOR_DIR)" "$(LIBDIR)/build"; \
+	fi
+
+C_clean:
+	rm -Rf "$(SHLIB)" "$(STATLIB)" "$(OBJECTS)"
+
+clean:
+	rm -Rf "$(SHLIB)" "$(STATLIB)" "$(OBJECTS)" "$(TARGET_DIR)"

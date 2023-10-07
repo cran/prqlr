@@ -1,14 +1,15 @@
 [package]
 name = "prqlr"
-version = "0.1.0"
+version = "0.9.1"
 edition = "2021"
 rust-version = "1.65"
+publish = false
 
 [lib]
 crate-type = ['staticlib']
 name = "prqlr"
 
 [dependencies]
-extendr-api = "0.4.0"
+extendr-api = "0.6.0"
 prql-compiler = { version = "0.9.5", default-features = false }
 anstream = { version = "0.3.2", features = ["auto"] }
