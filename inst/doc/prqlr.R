@@ -13,7 +13,7 @@ library(prqlr)
 from mtcars
 filter cyl > 6
 select {cyl, mpg}
-derive {mpg_int = round 0 mpg}
+derive {mpg_int = math.round 0 mpg}
 " |>
   prql_compile() |>
   cat()
@@ -32,7 +32,7 @@ dbWriteTable(con, "mtcars", mtcars)
 from mtcars
 filter cyl > 6
 select {cyl, mpg}
-derive {mpg_int = round 0 mpg}
+derive {mpg_int = math.round 0 mpg}
 take 3
 " |>
   prql_compile("sql.sqlite") |>
@@ -43,7 +43,7 @@ take 3
 from mtcars
 filter cyl > 6
 select {cyl, mpg}
-derive {mpg_int = round 0 mpg}
+derive {mpg_int = math.round 0 mpg}
 take 3
 " |>
   prql_compile("sql.sqlite") |>
@@ -60,7 +60,7 @@ filter air_time != null
 group {origin, dest} (
   aggregate {
     num_flts = count this,
-    avg_delay = (average arr_delay | round 0)
+    avg_delay = (average arr_delay | math.round 0)
   }
 )
 sort {-origin, avg_delay}
