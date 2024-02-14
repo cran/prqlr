@@ -14,12 +14,14 @@ prql_compile(
 \arguments{
 \item{prql_query}{a PRQL query string.}
 
-\item{target}{a compile target name to use. If not specified, the target contained in the query will be used.
+\item{target}{a compile target name to use. If not specified (\code{NULL}),
+the target contained in the query will be used.
 All available target names can be listed with the \link{prql_get_targets} function.}
 
-\item{format}{a logical flag. Whether to format the SQL query.}
+\item{format}{a logical flag (default: \code{TRUE}). Whether to format the SQL query.}
 
-\item{signature_comment}{a logical flag. Whether to add a signature comment to the output SQL query.}
+\item{signature_comment}{a logical flag. (default: \code{TRUE}).
+Whether to add a signature comment to the output SQL query.}
 }
 \value{
 a SQL query string
@@ -42,7 +44,7 @@ select !{cyl}
   prql_compile("sql.duckdb") |>
   cat()
 
-# If the `target` argument is `NULL` (default) or `NA` or `"sql.any"`,
+# If the `target` argument is `NULL` (default) or `"sql.any"`,
 # the target specified in the header of the query will be used.
 "
 prql target:sql.duckdb
