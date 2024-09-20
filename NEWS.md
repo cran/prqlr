@@ -1,3 +1,19 @@
+# prqlr 0.9.0
+
+## Breaking changes
+
+- Based on [`prqlc`](https://github.com/prql/prql) 0.13.0 (#312)
+
+## Bug fixes
+
+- Fix to report rustc version even if installing with pre-built binaries. (#305)
+
+## Miscellaneous
+
+- On R-universe, installing with pre-built binaries is now default. (#305)
+- The configure script now compares the package's MSRV and the rustc version,
+  and if the rustc version is less than the MSRV, an warning message is displayed. (#311)
+
 # prqlr 0.8.1
 
 Just dependency updates. No user-facing changes.
