@@ -11,16 +11,30 @@ NULL
 
 # Check class and extract the external pointer embedded in the environment
 .savvy_extract_ptr <- function(e, class) {
-  if (is.null(e)) {
+  if(is.null(e)) {
     return(NULL)
   }
 
-  if (inherits(e, class)) {
+  if(inherits(e, class)) {
     e$.ptr
   } else {
     msg <- paste0("Expected ", class, ", got ", class(e)[1])
     stop(msg, call. = FALSE)
   }
+}
+
+# Prohibit modifying environments
+
+#' @export
+`$<-.savvy_prqlr__sealed` <- function(x, name, value) {
+  class <- gsub("__bundle$", "", class(x)[1])
+  stop(class, " cannot be modified", call. = FALSE)
+}
+
+#' @export
+`[[<-.savvy_prqlr__sealed` <- function(x, i, value) {
+  class <- gsub("__bundle$", "", class(x)[1])
+  stop(class, " cannot be modified", call. = FALSE)
 }
 
 #' @title Compile a PRQL query into a SQL query
@@ -30,23 +44,8 @@ NULL
 #' @param signature_comment a logical flag. Whether to add a signature comment to the output SQL query.
 #' @return a list contains a SQL string or an error message.
 #' @noRd
-`compile` <- function(`prql_query`, `target`, `format`, `signature_comment`) {
-  .Call(savvy_compile__impl, `prql_query`, `target`, `format`, `signature_comment`)
-}
-
-#' @noRd
-`prql_to_pl` <- function(`prql_query`) {
-  .Call(savvy_prql_to_pl__impl, `prql_query`)
-}
-
-#' @noRd
-`pl_to_rq` <- function(`pl_json`) {
-  .Call(savvy_pl_to_rq__impl, `pl_json`)
-}
-
-#' @noRd
-`rq_to_sql` <- function(`rq_json`) {
-  .Call(savvy_rq_to_sql__impl, `rq_json`)
+`compile` <- function(`prql_query`, `target`, `format`, `signature_comment`, `display`) {
+  .Call(savvy_compile__impl, `prql_query`, `target`, `format`, `signature_comment`, `display`)
 }
 
 #' @title prqlc's version
@@ -54,6 +53,11 @@ NULL
 #' @noRd
 `compiler_version` <- function() {
   .Call(savvy_compiler_version__impl)
+}
+
+#' @noRd
+`pl_to_rq` <- function(`pl_json`) {
+  .Call(savvy_pl_to_rq__impl, `pl_json`)
 }
 
 #' @title Get available target names
@@ -65,3 +69,15 @@ NULL
 `prql_get_targets` <- function() {
   .Call(savvy_prql_get_targets__impl)
 }
+
+#' @noRd
+`prql_to_pl` <- function(`prql_query`) {
+  .Call(savvy_prql_to_pl__impl, `prql_query`)
+}
+
+#' @noRd
+`rq_to_sql` <- function(`rq_json`) {
+  .Call(savvy_rq_to_sql__impl, `rq_json`)
+}
+
+
