@@ -1,6 +1,8 @@
 url	sha256sum
-https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.1/libprqlr-0.13.1-aarch64-apple-darwin.tar.gz	6039caa03a7dea303144bbdd2b558b40a3ceffe89b1bf4782b50f83e04d58f7d
-https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.1/libprqlr-0.13.1-aarch64-unknown-linux-musl.tar.gz	0d1410576ac700ebfdb2200fec2716cc2c78fe858a152e1d66fad9b984e41fd2
-https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.1/libprqlr-0.13.1-x86_64-apple-darwin.tar.gz	f46f0f1f6e555e4b007125cb68ba1e40265bdcbd9eec66db5fe690db537be52e
-https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.1/libprqlr-0.13.1-x86_64-pc-windows-gnu.tar.gz	827b90e2b284c3c9e2e620ff8ab491e309e878a69c654e0bd443d025b2706fbe
-https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.1/libprqlr-0.13.1-x86_64-unknown-linux-musl.tar.gz	9916bbf08bbdea1ec3bd06b5bca200bc3483ea57e8a0b4f8a1a54939eea7ac24
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-aarch64-apple-darwin.tar.gz	5320a6e40c10b29a97b987c78ec612c99e7937a3fd58a7c89a7fcec25abdb7b0
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-aarch64-unknown-linux-gnu.tar.gz	d7dd0d0d728d16a5a65aa1c30494b029c45310964bd2070e51478f13e9d0e6e5
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-aarch64-unknown-linux-musl.tar.gz	28823f9d9bf95d370d0bcaa4c2b1530a112476faa95edc95f50c9f72d403dcb6
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-x86_64-apple-darwin.tar.gz	1d596e79c867d6d79f9e420c2ab73449d03f5143cafce6121c3c2a215db4ad76
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-x86_64-pc-windows-gnu.tar.gz	2590d5cc5a5f9ec76ec04c256c98874464d656b448b8cbed63329a25cd6c1342
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-x86_64-unknown-linux-gnu.tar.gz	10187ecdb83738ac61d6bc2957022b92c4705b969758b976f83b2a0b014e23a6
+https://github.com/PRQL/prqlc-r/releases/download/lib-v0.13.2/libprqlr-0.13.2-x86_64-unknown-linux-musl.tar.gz	be76222b20e16bc2a0bb4e576c8db34e0ca0a19c30b5f464e16fa4e0fe2f2695
